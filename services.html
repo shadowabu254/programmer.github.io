@@ -3,57 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services Page</title>
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+
+        .service-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .service-list li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .contact-form h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #ff5252;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #ff1744;
+        }
+
+        #msg {
+            color: #4caf50;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div>
-    <p style="color: green;"><em>Unlock your potential with my tailored solutions. Experience expertise, collaboration, and exceptional service. Let's achieve success together.<br>This are the current services i Offer</em></p>
-    <section>
-    <ol class="service-list">
-        <table border="2">
-        <tr><th><h1 style="color: red;">MY SERVICES/WORK</h1></td></th></tr>
-        <tr><td><li>Website Development</li></td></tr>
-        <tr><td><li>Consultation Task</li></td></tr>
-        <tr><td><li>Software Development</li></td></tr>
-        <tr><td><li>App Development</li></td></tr>
-        <tr><td><li>Project Management</li></td></tr>
-        <tr><td><li>Technical Writting</li></td></tr>
-        <tr><td><li>Database Management</li></td></tr>
-        <tr><td><li>Operating Systems</li></td></tr>
-        <tr><td><li>Ms Office Skills like word,excel</li></td></tr>
-        <tr><td><li>Algorithm Analysis and Design</li></td></tr>
-        <tr><td><li>Data Structures </li></td></tr>
-        </table>
-    </ol>
-    </section>
+    <div class="container">
+        <h1>MY SERVICES/WORK</h1>
+        <p><em>Unlock your potential with our tailored solutions. Experience expertise, collaboration, and exceptional service. Let's achieve success together.</em></p>
+        <ul class="service-list">
+            <li>Website Development</li>
+            <li>Consultation Task</li>
+            <li>Software Development</li>
+            <li>App Development</li>
+            <li>Project Management</li>
+            <li>Technical Writing</li>
+            <li>Database Management</li>
+        </ul>
+
+        <div class="contact-form">
+            <h2>Apply for My Services Below</h2>
+            <form name="submit-to-google-sheet">
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <textarea name="message" rows="6" placeholder="Enter your Message"></textarea>
+                <button type="submit" class="btn btn2">Submit</button>
+            </form>
+            <span id="msg"></span>
+        </div>
     </div>
-    <div class="contact-right">
-        <form name="submit-to-google-sheet">
-            <h2 style="color: red;">Apply for My Services Below</h2>
-            <input type="text" name="name" placeholder="Enter your name" required>
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <textarea name="message" rows="6" placeholder="Enter your Message"></textarea>
-            <button type="submit" class="btn btn2">Submit</button>
-        </form>
-        <span id="msg"></span>
-    </div>
+
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbw6OoPb-2f90xZTJyoXNbTepge1AQ5fnLKkPWSVjM5OfPBdbhcA6TxhahJqK2xylO6d/exec'
         const form = document.forms['submit-to-google-sheet']
-        const msg=document.getElementById('msg')
+        const msg = document.getElementById('msg')
         form.addEventListener('submit', e => {
-          e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                msg.innerHTML="Message sent Successfully"
-                setTimeout(function(){
-                    msg.innerHTML=""
-                },5000)
-                form.reset()
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    msg.innerHTML = "Message sent Successfully"
+                    setTimeout(function(){
+                        msg.innerHTML = ""
+                    }, 5000)
+                    form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
         })
-            .catch(error => console.error('Error!', error.message))
-        })
-      </script>
+    </script>
 </body>
 </html>
